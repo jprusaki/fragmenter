@@ -1,6 +1,6 @@
 {
 	"name": "fragmenter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": {
 		"name": "José Pedro Rusakiewicz Serna (jprusaki)",
 		"email": "pepfpgs@gmail.com"
@@ -13,7 +13,14 @@
 		"lib"
 	],
 	"description": "A lightweight web design utility that simplifies splitting and wrapping text into individual elements for custom lettering.",
-	"tags": [
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jprusaki/fragmenter.git"
+	},
+	"engines": {
+		"node": ">=23.11.0"
+	},
+	"keywords": [
 		"typography",
 		"web-design",
 		"web-development",
