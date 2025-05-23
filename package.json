@@ -1,0 +1,53 @@
+{
+	"name": "fragmenter",
+	"version": "1.0.0",
+	"author": {
+		"name": "José Pedro Rusakiewicz Serna (jprusaki)",
+		"email": "pepfpgs@gmail.com"
+	},
+	"type": "module",
+	"license": "Apache-2.0",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib"
+	],
+	"description": "A lightweight web design utility that simplifies splitting and wrapping text into individual elements for custom lettering.",
+	"tags": [
+		"typography",
+		"web-design",
+		"web-development",
+		"lettering",
+		"dom",
+		"text",
+		"text-styling",
+		"typescript",
+		"frontend",
+		"html"
+	],
+	"bugs": {
+		"url": "https://github.com/jprusaki/fragmenter/issues"
+	},
+	"scripts": {
+		"build": "tsc --project tsconfig.build.json && yarn minify",
+		"minify": "terser -co lib/index.js -m reserved=['element','method','options'] lib/index.js",
+		"test": "vitest",
+		"coverage": "vitest run --coverage",
+		"watch": "tsc --project tsconfig.build.json -w",
+		"lint": "eslint --fix"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.27.0",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@vitest/coverage-v8": "^3.1.4",
+		"eslint": "^9.27.0",
+		"eslint-plugin-compat": "^6.0.2",
+		"globals": "^16.1.0",
+		"jsdom": "^26.1.0",
+		"terser": "^5.39.2",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.32.1",
+		"vitest": "^3.1.4"
+	},
+	"packageManager": "yarn@4.9.1"
+}
