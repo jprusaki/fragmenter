@@ -174,7 +174,7 @@ Result:
   to text within the same element. Splitting text into separate elements, as
   `fragmenter` does, disables these typographic features.
 - Be mindful of performance. Splitting many elements can be computationally
-  expensive, especially for a large amounts of text. If you need to apply custom
+  expensive, especially for large amounts of text. If you need to apply custom
   styles to a large text, you best choice is typography, not lettering.
 
 ## Contributing
