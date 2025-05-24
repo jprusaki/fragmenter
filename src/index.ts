@@ -215,7 +215,13 @@ function getClassName(fragmentClass: FragmentClass, text: string, index?: number
 	}
 
 	if (isNumber(index)) {
-		return fragmentClass(index, text);
+		const res = fragmentClass(index, text);
+
+		if(!isUndefined(res) && !isString(res)) {
+			throw new TypeError('The return value of the fragmentClass function can only be a string or undefined.');
+		}
+
+		return res;
 	}
 }
 
@@ -247,4 +253,8 @@ function isMethod(value: unknown): value is FragmenterMethods {
 
 function isFragmentClass(value: unknown): value is FragmentClass {
 	return isString(value) || typeof value === 'function';
+}
+
+function isUndefined(value: unknown): value is undefined {
+	return typeof value === 'undefined';
 }

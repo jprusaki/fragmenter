@@ -343,5 +343,14 @@ describe('validation', () => {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			fragmentClass: 1 as any
 		})).toThrow('fragmentClass can only be a string or a function.');
+
+		el.textContent = 'Hello';
+
+		expect(() => makeFragments(el, 'char', {
+			fragmentClass: () => {
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				return true as any;
+			}
+		})).toThrow('The return value of the fragmentClass function can only be a string or undefined.');
 	});
 });
