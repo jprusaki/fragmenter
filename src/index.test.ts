@@ -213,7 +213,7 @@ describe('makeFragments', () => {
 		});
 
 		expect(el.querySelector('.colorOne')).toHaveTextContent('Hello');
-		expect(el.children[1].classList.length).toBe(0);
+		expect(el.lastElementChild?.classList.length).toBe(0);
 	});
 
 	it('should update the segments when the text content changes', () => {
