@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.2
+
+* Performance optimizations and code readability improvements.
+
 ## v1.0.1
 
 * Update package metadata.
