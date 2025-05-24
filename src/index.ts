@@ -219,8 +219,8 @@ function getClassName(fragmentClass: FragmentClass, text: string, index?: number
 	}
 }
 
-function isString(element: unknown): element is string {
-	return typeof element === 'string';
+function isString(value: unknown): value is string {
+	return typeof value === 'string';
 }
 
 function isNumber(value: unknown): value is number {
@@ -231,8 +231,8 @@ function isBoolean(value: unknown): value is boolean {
 	return typeof value === 'boolean';
 }
 
-function isHTMLElement(element: unknown): element is HTMLElement {
-	return element instanceof HTMLElement;
+function isHTMLElement(value: unknown): value is HTMLElement {
+	return value instanceof HTMLElement;
 }
 
 function isDocument(value: unknown): value is Document {
