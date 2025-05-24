@@ -11,7 +11,7 @@ afterEach(() => {
 	el.remove();
 });
 
-describe('lettering function', () => {
+describe('makeFragments', () => {
 	it('should accept HTML elements', () => {
 		const text = 'Hello';
 		el.textContent = text;
