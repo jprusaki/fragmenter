@@ -147,8 +147,9 @@ function apply(element: HTMLElement, method: FragmenterMethods, options?: Fragme
 	};
 
 	if (method === 'line') {
-		const brList = element.querySelectorAll('br');
-		for (const br of Array.from(brList)) {
+		const brList = Array.from(element.getElementsByTagName('br'));
+
+		for (const br of brList) {
 			br.replaceWith(document.createTextNode(LINE_SPLITTER));
 		}
 	}
