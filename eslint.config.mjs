@@ -28,7 +28,8 @@ export default defineConfig([
 	},
 	{
 		'rules': {
-			'quotes': ['error', 'single', { 'avoidEscape': true }]
+			'quotes': ['error', 'single', { 'avoidEscape': true }],
+			'semi': ['error', 'always']
 		}
 	}
 ]);

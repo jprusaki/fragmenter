@@ -44,7 +44,7 @@ const defaultOptions: Required<FragmenterOptions> = {
 	addEllipsis: false,
 	ellipsisText: '…',
 	fragmentClass: ''
-}
+};
 const DEFAULT_MAX_ELEMENTS = 400;
 const LINE_SPLITTER = 'dda8fc3819919fd096e9bd761d37dd10'; // MD5 hash of the string "LINE_SPLITTER".
 
@@ -61,29 +61,29 @@ export function makeFragments(
 	element: string | HTMLElement, method: FragmenterMethods, options?: FragmenterOptions
 ): void {
 	if (element === null || typeof element === 'undefined') {
-		throw new TypeError('Element is not set.')
+		throw new TypeError('Element is not set.');
 	}
 
 	if (!isString(element) && !isHTMLElement(element)) {
-		throw new TypeError('Element must be of type string or HTMLElement.')
+		throw new TypeError('Element must be of type string or HTMLElement.');
 	}
 
 	if(!method) {
-		throw new Error('Method is required.')
+		throw new Error('Method is required.');
 	}
 
 
 	if (!isMethod(method)) {
-		throw new TypeError('Invalid split method.')
+		throw new TypeError('Invalid split method.');
 	}
 
 	if(options) {
-		validateOptions(options)
+		validateOptions(options);
 	}
 
 	const {
 		scope,
-	} = { ...defaultOptions, ...options }
+	} = { ...defaultOptions, ...options };
 
 	const elements = isString(element)
 		? Array.from(scope.querySelectorAll(element))
@@ -91,9 +91,9 @@ export function makeFragments(
 
 	elements.forEach((element) => {
 		if (isHTMLElement(element)) {
-			apply(element, method, options)
+			apply(element, method, options);
 		}
-	})
+	});
 }
 
 function validateOptions(options: FragmenterOptions) {
@@ -103,36 +103,36 @@ function validateOptions(options: FragmenterOptions) {
 		addEllipsis,
 		ellipsisText,
 		fragmentClass
-	} = { ...defaultOptions, ...options }
+	} = { ...defaultOptions, ...options };
 
 	if (maxElements === null) {
-		throw new TypeError('maxElements must be a number.')
+		throw new TypeError('maxElements must be a number.');
 	}
 
 	if (!Number.isInteger(maxElements)) {
-		throw new Error('maxElements can only be an integer.')
+		throw new Error('maxElements can only be an integer.');
 	}
 
 	if (maxElements <= 0
 		|| !isFinite(maxElements)
 		|| maxElements > DEFAULT_MAX_ELEMENTS) {
-		throw new RangeError('maxElements value is out of range.')
+		throw new RangeError('maxElements value is out of range.');
 	}
 
 	if (scope && !isHTMLElement(scope) && !isDocument(scope)) {
-		throw new TypeError('scope can only be an HTMLElement or Document.')
+		throw new TypeError('scope can only be an HTMLElement or Document.');
 	}
 
 	if (!isBoolean(addEllipsis)) {
-		throw new TypeError('addEllipsis can only be a boolean.')
+		throw new TypeError('addEllipsis can only be a boolean.');
 	}
 
 	if (!isString(ellipsisText)) {
-		throw new TypeError('ellipsisText can only be a string.')
+		throw new TypeError('ellipsisText can only be a string.');
 	}
 
 	if (!isFragmentClass(fragmentClass)) {
-		throw new TypeError('fragmentClass can only be a string or a function.')
+		throw new TypeError('fragmentClass can only be a string or a function.');
 	}
 }
 
@@ -144,7 +144,7 @@ function apply(element: HTMLElement, method: FragmenterMethods, options?: Fragme
 	const { maxElements, addEllipsis, ellipsisText, fragmentClass } = {
 		...defaultOptions,
 		...options,
-	}
+	};
 
 	if (method === 'line') {
 		const brList = element.querySelectorAll('br');
@@ -162,7 +162,7 @@ function apply(element: HTMLElement, method: FragmenterMethods, options?: Fragme
 	});
 
 	if (addEllipsis && limitedSegments.length < segments.length) {
-		const ellipsisSpan = createSpanElement(ellipsisText, 'ellipsis')
+		const ellipsisSpan = createSpanElement(ellipsisText, 'ellipsis');
 
 		fragment.append(ellipsisSpan);
 	}
@@ -170,7 +170,7 @@ function apply(element: HTMLElement, method: FragmenterMethods, options?: Fragme
 	if (!element.hasAttribute('aria-label')) {
 		element.ariaLabel = method === 'char'
 			? element.textContent
-			: segments.join(' ')
+			: segments.join(' ');
 	}
 
 	element.innerHTML = '';
@@ -191,17 +191,17 @@ function splitText(text: string, method: FragmenterMethods): string[] {
 function createSpanElement(
 	text: string, method: FragmenterMethods | 'ellipsis', fragmentClass?: FragmentClass, index?: number,
 ): HTMLSpanElement {
-	const span = document.createElement('span')
+	const span = document.createElement('span');
 	span.textContent = text;
 	span.ariaHidden = 'true';
 
 	if (typeof index !== 'undefined') {
 		const className = typeof fragmentClass === 'function'
 			? fragmentClass(index, text)
-			: fragmentClass
+			: fragmentClass;
 
 		if (className) {
-			span.classList.add(className)
+			span.classList.add(className);
 		}
 	}
 
@@ -211,26 +211,26 @@ function createSpanElement(
 			break;
 
 		case 'line':
-			span.dataset.line = text
+			span.dataset.line = text;
 			break;
 
 		case 'word':
-			span.dataset.word = text
+			span.dataset.word = text;
 			break;
 
 		case 'ellipsis':
-			span.dataset.ellipsis = text
+			span.dataset.ellipsis = text;
 	}
 
-	return span
+	return span;
 }
 
 function isString(element: unknown): element is string {
-	return typeof element === 'string'
+	return typeof element === 'string';
 }
 
 function isBoolean(value: unknown): value is boolean {
-	return typeof value === 'boolean'
+	return typeof value === 'boolean';
 }
 
 function isHTMLElement(element: unknown): element is HTMLElement {
@@ -244,9 +244,9 @@ function isDocument(value: unknown): value is Document {
 function isMethod(value: unknown): value is FragmenterMethods {
 	return value === 'char'
 		|| value === 'word'
-		|| value === 'line'
+		|| value === 'line';
 }
 
 function isFragmentClass(value: unknown): value is FragmentClass {
-	return isString(value) || typeof value === 'function'
+	return isString(value) || typeof value === 'function';
 }
