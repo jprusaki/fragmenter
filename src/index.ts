@@ -196,10 +196,8 @@ function createSpanElement(
 	span.textContent = text;
 	span.ariaHidden = 'true';
 
-	if (typeof index !== 'undefined') {
-		const className = typeof fragmentClass === 'function'
-			? fragmentClass(index, text)
-			: fragmentClass;
+	if (fragmentClass) {
+		const className = getClassName(fragmentClass, text, index);
 
 		if (className) {
 			span.classList.add(className);
@@ -226,8 +224,22 @@ function createSpanElement(
 	return span;
 }
 
+function getClassName(fragmentClass: FragmentClass, text: string, index?: number): string | undefined {
+	if (isString(fragmentClass)) {
+		return fragmentClass;
+	}
+
+	if (isNumber(index)) {
+		return fragmentClass(index, text);
+	}
+}
+
 function isString(element: unknown): element is string {
 	return typeof element === 'string';
+}
+
+function isNumber(value: unknown): value is number {
+	return typeof value === 'number';
 }
 
 function isBoolean(value: unknown): value is boolean {
