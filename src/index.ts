@@ -204,22 +204,7 @@ function createSpanElement(
 		}
 	}
 
-	switch (method) {
-		case 'char':
-			span.dataset.char = text;
-			break;
-
-		case 'line':
-			span.dataset.line = text;
-			break;
-
-		case 'word':
-			span.dataset.word = text;
-			break;
-
-		case 'ellipsis':
-			span.dataset.ellipsis = text;
-	}
+	span.dataset[method] = text;
 
 	return span;
 }
