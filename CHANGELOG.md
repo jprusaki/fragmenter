@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.3
+
+* Add UMD module support.
+
 ## v1.0.2
 
 * Performance optimizations and code readability improvements.
