@@ -6,6 +6,9 @@
 	"compilerOptions": {
 		"listEmittedFiles": true,
 		"module": "es6",
-		"target": "es6"
+		"target": "es6",
+		"declaration": true,
+		"declarationDir": "./types",
+		"sourceMap": true,
 	}
 }

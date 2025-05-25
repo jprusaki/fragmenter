@@ -17,9 +17,8 @@ node_modules
 .pnp.*
 
 lib
-
+/types
+*.d.ts
 test/coverage
-
 .vscode
-
 *.tgz

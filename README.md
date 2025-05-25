@@ -1,5 +1,7 @@
 # fragmenter
 
+---
+
 A lightweight web design utility that simplifies splitting and wrapping text
 into individual elements, making it easy to apply unique styles to single
 characters, words, or lines of text for custom lettering.
@@ -9,7 +11,14 @@ framework agnostic.
 
 ## Installation
 
-Choose the installation method for your package manager:
+This project includes both ESM and UMD module formats for better compatibility.
+
+### ES module
+
+This version supports module loaders (e.g., a bundler like Webpack, Rollup, or
+Parcel, or a modern browser with ES module support).
+
+Choose the installation method  for your package manager:
 
 ```bash
 npm install fragmenter
@@ -18,6 +27,36 @@ yarn add fragmenter
 # or
 pnpm add fragmenter
 ```
+
+Importing in your code:
+
+```javascript
+import { makeFragments } from 'fragmenter';
+
+// Use fragmenter...
+```
+
+### UMD module
+
+This version supports environments that don't require module loaders or a build
+step.
+
+It can be linked via UNPKG or jsDelivr like this:
+
+```html
+<body>
+  <!-- Page content -->
+
+  <script src="https://unpkg.com/fragmenter@:version/lib/fragmenter.umd.min.js"></script>
+  <script>
+    // fragmenter is now available in the global scope
+    const { makeFragments } = fragmenter;
+  </script>
+</body>
+```
+
+The `:version` placeholder in the URL needs to be replaced with an actual
+version number.
 
 ## Usage
 
@@ -175,7 +214,7 @@ Result:
   `fragmenter` does, disables these typographic features.
 - Be mindful of performance. Splitting many elements can be computationally
   expensive, especially for large amounts of text. If you need to apply custom
-  styles to a large text, you best choice is typography, not lettering.
+  styles to a large text, your best choice is typography, not lettering.
 
 ## Contributing
 
@@ -183,17 +222,23 @@ Result:
 2. Create a new branch (`git checkout -b my-new-feature`).
 3. Make your changes.
 4. Write tests for your changes.
-5. Check your changes for typos (`yarn lint`).
+5. Check code style issues (`yarn lint`).
 6. Run tests (`yarn test`).
-7. Submit a pull request [at Github's pull request page](https://github.com/jprusaki/fragmenter/pulls).
+7. Submit a pull request [at Github's pull request page][1].
 
 ## License
 
-This project is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+This project is licensed under the Apache License 2.0 found in the [LICENSE][2]
+file at the root directory of this source tree.
 
 ## Acknowledgments
 
 These projects were a great source of inspiration:
 
-- [Lettering.js](http://github.com/davatron5000/Lettering.js)
-- [letterify](https://github.com/dazld/letterify)
+- [Lettering.js][3]
+- [letterify][4]
+
+[1]: https://github.com/jprusaki/fragmenter/pulls
+[2]: https://github.com/jprusaki/fragmenter/blob/main/LICENSE
+[3]: http://github.com/davatron5000/Lettering.js
+[4]: https://github.com/dazld/letterify
