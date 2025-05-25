@@ -1,7 +1,5 @@
 # fragmenter
 
----
-
 A lightweight web design utility that simplifies splitting and wrapping text
 into individual elements, making it easy to apply unique styles to single
 characters, words, or lines of text for custom lettering.
