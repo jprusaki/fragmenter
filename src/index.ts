@@ -25,7 +25,7 @@ interface FragmenterOptions {
 	 *
 	 * @default document
 	 */
-	scope?: Element | Document,
+	scope?: HTMLElement | Document,
 	/**
 	 * The maximum number of elements to create. Limited for performance reasons.
 	 *
