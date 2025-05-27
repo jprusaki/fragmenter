@@ -306,9 +306,11 @@ function isUndefined(value: unknown): value is undefined {
 }
 
 function isLocale(value: unknown): value is Intl.LocalesArgument {
+	const isValidLocale = (l: unknown) => typeof l === 'string' || l instanceof Intl.Locale;
+
 	if (Array.isArray(value)) {
-		return value.every((l) => typeof l === 'string' || l instanceof Intl.Locale);
+			return value.every(isValidLocale);
 	}
 
-	return typeof value === 'string' || value instanceof Intl.Locale;
+	return isValidLocale(value);
 }
