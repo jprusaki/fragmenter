@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.0
+
+* Add support for grapheme clusters composed of multiple code points.
+
 ## v1.0.3
 
 * Add UMD module support.
