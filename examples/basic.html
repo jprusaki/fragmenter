@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Basic</title>
+</head>
+
+<body>
+	<div class="a">Hello</div>
+	<div class="b">Hello World!</div>
+	<div class="c">Hello! How are you?</div>
+	<script src="../lib/fragmenter.umd.min.js"></script>
+	<script>
+		const { makeFragments } = fragmenter;
+
+		makeFragments('.a', 'grapheme');
+		makeFragments('.b', 'word');
+		makeFragments('.c', 'sentence');
+	</script>
+</body>
+
+</html>

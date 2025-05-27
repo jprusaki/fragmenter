@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-type FragmenterMethods = 'char' | 'word' | 'line'
+type Granularity = 'grapheme' | 'word' | 'sentence' | 'line'
 
-type FragmentClass = string | ((index: number, text: string) => string | undefined);
+interface Segment {
+	value: string;
+	gAttr: boolean;
+}
 
-interface FragmenterOptions {
+type CSSClassOrClassFn = string | ((index: number, text: string) => string | undefined)
+
+interface Options {
 	/**
 	 * Limits the search for the element to descendants of this element. If not
 	 * provided, the entire document is searched.
 	 *
 	 * @default document
 	 */
-	scope?: HTMLElement | Document,
+	scope?: HTMLElement | Document;
 	/**
 	 * The maximum number of elements to create. Limited for performance reasons.
 	 *
@@ -33,7 +38,7 @@ interface FragmenterOptions {
 	 */
 	maxElements?: number;
 	/**
-	 * If the text is longer than {@link FragmenterOptions.maxElements}, adds an
+	 * If the text is longer than {@link Options.maxElements}, adds an
 	 * ellipsis (…) at the end.
 	 *
 	 * @default false
@@ -51,49 +56,48 @@ interface FragmenterOptions {
 	 *
 	 * @default ""
 	 */
-	fragmentClass?: FragmentClass;
+	fragmentClass?: CSSClassOrClassFn;
+	/**
+	 * The locales to use to split the text.
+	 */
+	locales?: Intl.LocalesArgument;
 }
 
-const defaultOptions: Required<FragmenterOptions> = {
+const defaultOptions: Required<Options> = {
 	scope: document,
 	maxElements: 400,
 	addEllipsis: false,
 	ellipsisText: '…',
-	fragmentClass: ''
+	fragmentClass: '',
+	locales: navigator.language,
 };
-const DEFAULT_MAX_ELEMENTS = 400;
 const LINE_SPLITTER = 'dda8fc3819919fd096e9bd761d37dd10'; // MD5 hash of the string "LINE_SPLITTER".
 
 /**
- * Splits `element.textContent` into characters, words, or lines and wraps each
- * segment in a new element.
+ * Splits `element.textContent` into graphemes, words, sentences, or lines,
+ * and wraps each segment in a new element.
  *
  * @param element The element that you want to process. It can be a CSS
  * selector or an HTML element.
- * @param method Specifies how the text should be split.
+ * @param granularity Specifies how to split the text.
  * @param options Customize how the process works.
  */
 export function makeFragments(
-	element: string | HTMLElement, method: FragmenterMethods, options?: FragmenterOptions
+	element: string | HTMLElement, granularity: Granularity, options?: Options,
 ): void {
 	if (element === null || typeof element === 'undefined') {
-		throw new TypeError('Element is not set.');
+		throw new TypeError('Element is required.');
 	}
 
 	if (!isString(element) && !isHTMLElement(element)) {
 		throw new TypeError('Element must be of type string or HTMLElement.');
 	}
 
-	if(!method) {
-		throw new Error('Method is required.');
+	if (!isGranularity(granularity)) {
+		throw new TypeError('Granularity can only be one of `grapheme`, `word`, `sentence` and `line`.');
 	}
 
-
-	if (!isMethod(method)) {
-		throw new TypeError('Invalid split method.');
-	}
-
-	if(options) {
+	if (options) {
 		validateOptions(options);
 	}
 
@@ -102,23 +106,24 @@ export function makeFragments(
 	} = { ...defaultOptions, ...options };
 
 	const elements = isString(element)
-		? Array.from(scope.querySelectorAll(element))
+		? [...scope.querySelectorAll(element)]
 		: [element];
 
 	elements.forEach((element) => {
 		if (isHTMLElement(element)) {
-			apply(element, method, options);
+			apply(element, granularity, options);
 		}
 	});
 }
 
-function validateOptions(options: FragmenterOptions) {
+function validateOptions(options: Options) {
 	const {
 		scope,
 		maxElements,
 		addEllipsis,
 		ellipsisText,
-		fragmentClass
+		fragmentClass,
+		locales,
 	} = { ...defaultOptions, ...options };
 
 	if (maxElements === null) {
@@ -126,12 +131,10 @@ function validateOptions(options: FragmenterOptions) {
 	}
 
 	if (!Number.isInteger(maxElements)) {
-		throw new Error('maxElements can only be an integer.');
+		throw new TypeError('maxElements can only be an integer.');
 	}
 
-	if (maxElements <= 0
-		|| !isFinite(maxElements)
-		|| maxElements > DEFAULT_MAX_ELEMENTS) {
+	if (maxElements <= 0) {
 		throw new RangeError('maxElements value is out of range.');
 	}
 
@@ -150,63 +153,91 @@ function validateOptions(options: FragmenterOptions) {
 	if (!isFragmentClass(fragmentClass)) {
 		throw new TypeError('fragmentClass can only be a string or a function.');
 	}
+
+	if (!isLocale(locales)) {
+		throw new TypeError('locales can only be a string, or instance of Intl.Locale, or an array of each.');
+	}
 }
 
-function apply(element: HTMLElement, method: FragmenterMethods, options?: FragmenterOptions): void {
+function apply(element: HTMLElement, granularity: Granularity, options?: Options): void {
 	if (!element.textContent) {
 		return;
 	}
 
-	const { maxElements, addEllipsis, ellipsisText, fragmentClass } = {
+	const { maxElements, addEllipsis, ellipsisText, fragmentClass, locales } = {
 		...defaultOptions,
 		...options,
 	};
 
-	if (method === 'line') {
-		const brList = Array.from(element.getElementsByTagName('br'));
+	if (granularity === 'line') {
+		const brList = [
+			...element.getElementsByTagName('br'),
+		];
 
 		for (const br of brList) {
 			br.replaceWith(document.createTextNode(LINE_SPLITTER));
 		}
 	}
 
-	const segments = splitText(element.textContent, method);
-	const limitedSegments = segments.slice(0, maxElements); // Limit segments
+	const segments = splitText(element.textContent, granularity, locales);
+	const limitedSegments = segments.slice(0, maxElements);
 
 	const fragment = document.createDocumentFragment();
-	limitedSegments.forEach((segment, index) => {
-		fragment.appendChild(createSpanElement(segment, method, fragmentClass, index));
+	limitedSegments.forEach(({ value, gAttr }, index) => {
+		const span = createSpanElement(value,  fragmentClass, index);
+
+		if (gAttr) {
+			span.dataset[granularity] = value;
+		}
+
+		fragment.append(span);
 	});
 
 	if (addEllipsis && limitedSegments.length < segments.length) {
-		const ellipsisSpan = createSpanElement(ellipsisText, 'ellipsis');
+		const ellipsisSpan = createSpanElement(ellipsisText);
 
+		ellipsisSpan.dataset.ellipsis = ellipsisText;
 		fragment.append(ellipsisSpan);
 	}
 
 	if (!element.hasAttribute('aria-label')) {
-		element.ariaLabel = method === 'char'
-			? element.textContent
-			: segments.join(' ');
+		element.ariaLabel = granularity === 'line'
+			? segments.flatMap(s => s.value).join(' ')
+			: element.textContent;
 	}
 
 	element.innerHTML = '';
-	element.appendChild(fragment);
+	element.append(fragment);
 }
 
-function splitText(text: string, method: FragmenterMethods): string[] {
-	switch (method) {
-		case 'char':
-			return text.split('');
-		case 'word':
-			return text.split(' ');
-		case 'line':
-			return text.split(LINE_SPLITTER);
+function splitText(text: string, granularity: Granularity, locales: Intl.LocalesArgument): Segment[] {
+	if (granularity === 'line') {
+		const segments: Segment[] = text.split(LINE_SPLITTER).map((s: string) => {
+			return {
+				value: s,
+				gAttr: true,
+			};
+		});
+
+		return segments;
 	}
+
+	const segments: Segment[] = [
+		...new Intl.Segmenter(locales, {
+			granularity,
+		}).segment(text),
+	].map((s) => {
+		return {
+			value: s.segment,
+			gAttr: granularity === 'word' ? !!s.isWordLike : true,
+		};
+	});
+
+	return segments;
 }
 
 function createSpanElement(
-	text: string, method: FragmenterMethods | 'ellipsis', fragmentClass?: FragmentClass, index?: number,
+	text: string, fragmentClass?: CSSClassOrClassFn, index?: number,
 ): HTMLSpanElement {
 	const span = document.createElement('span');
 	span.textContent = text;
@@ -220,12 +251,10 @@ function createSpanElement(
 		}
 	}
 
-	span.dataset[method] = text;
-
 	return span;
 }
 
-function getClassName(fragmentClass: FragmentClass, text: string, index?: number): string | undefined {
+function getClassName(fragmentClass: CSSClassOrClassFn, text: string, index?: number): string | undefined {
 	if (isString(fragmentClass)) {
 		return fragmentClass;
 	}
@@ -233,7 +262,7 @@ function getClassName(fragmentClass: FragmentClass, text: string, index?: number
 	if (isNumber(index)) {
 		const res = fragmentClass(index, text);
 
-		if(!isUndefined(res) && !isString(res)) {
+		if (!isUndefined(res) && !isString(res)) {
 			throw new TypeError('The return value of the fragmentClass function can only be a string or undefined.');
 		}
 
@@ -261,16 +290,25 @@ function isDocument(value: unknown): value is Document {
 	return value instanceof Document;
 }
 
-function isMethod(value: unknown): value is FragmenterMethods {
-	return value === 'char'
+function isGranularity(value: unknown): value is Granularity {
+	return value === 'grapheme'
 		|| value === 'word'
+		|| value === 'sentence'
 		|| value === 'line';
 }
 
-function isFragmentClass(value: unknown): value is FragmentClass {
+function isFragmentClass(value: unknown): value is CSSClassOrClassFn {
 	return isString(value) || typeof value === 'function';
 }
 
 function isUndefined(value: unknown): value is undefined {
 	return typeof value === 'undefined';
+}
+
+function isLocale(value: unknown): value is Intl.LocalesArgument {
+	if (Array.isArray(value)) {
+		return value.every((l) => typeof l === 'string' || l instanceof Intl.Locale);
+	}
+
+	return typeof value === 'string' || value instanceof Intl.Locale;
 }

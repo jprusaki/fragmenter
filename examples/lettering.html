@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Lettering</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+	<style>
+		body {
+			visibility: hidden;
+		}
+
+		#logo {
+			font-family: "Anton", "Arial Black", sans-serif;
+			text-transform: uppercase;
+			font-weight: 400;
+			font-size: 170px;
+			line-height: 0;
+			margin-left: 20px;
+		}
+
+		#logo span {
+			display: inline-block;
+			position: relative;
+			letter-spacing: 5px;
+			bottom: 0;
+			transition: bottom 0.1s ease-out;
+		}
+
+		#logo span:hover {
+			bottom: 5px
+		}
+
+		#logo .char1 {
+			color: hsl(358.19, 100%, 67.45%);
+			text-shadow: hsl(358.19, 100%, 30%) -8px 4px 0
+		}
+
+		#logo .char2 {
+			color: hsl(23.46, 100%, 64.9%);
+			text-shadow: hsl(23.46, 100%, 30%) -8px 4px 0
+		}
+
+		#logo .char3 {
+			color: hsl(43.86, 100%, 61.37%);
+			text-shadow: hsl(43.86, 100%, 30%) -8px 4px 0
+		}
+
+		#logo .char4,
+		#logo .char9 {
+			color: hsl(83.19, 68.2%, 46.86%);
+			text-shadow: hsl(83.19, 68.2%, 30%) -8px 4px 0
+		}
+
+		#logo .char5,
+		#logo .char8 {
+			color: hsl(203.16, 77.38%, 60.33%);
+			text-shadow: hsl(203.16, 77.38%, 40%) -8px 4px 0
+		}
+
+		#logo .char6 {
+			color: hsl(265.35, 31.84%, 55.73%);
+			text-shadow: hsl(265.35, 31.84%, 30.73%) -8px 4px 0
+		}
+
+		#logo .char7 {
+			color: hsl(219.06, 44.54%, 55.67%);
+			text-shadow: hsl(219.06, 44.54%, 30.67%) -8px 4px 0
+		}
+	</style>
+</head>
+
+<body>
+	<h1 id="logo">Lettering</h1>
+
+	<script src="../lib/fragmenter.umd.min.js"></script>
+	<script>
+		window.addEventListener('load', function () {
+			document.body.style.visibility = 'visible';
+		});
+
+		const { makeFragments } = fragmenter;
+
+		makeFragments('#logo', 'grapheme', {
+			fragmentClass(index, text) {
+				return `char${index + 1}`;
+			}
+		})
+	</script>
+</body>
+
+</html>

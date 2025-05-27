@@ -1,22 +1,29 @@
 # fragmenter
 
 A lightweight web design utility that simplifies splitting and wrapping text
-into individual elements, making it easy to apply unique styles to single
-characters, words, or lines of text for custom lettering.
+into individual elements, making it easy to apply unique styles for custom
+lettering.
 
-It's fast, simple to use, and thoroughly tested. It has zero dependencies and is
+It supports splitting text by graphemes, words, sentences, and lines.
+
+It is fast, simple to use, and thoroughly tested. It has zero dependencies and is
 framework agnostic.
+
+As of version 2.0.0, it supports grapheme clusters with multiple code points and
+locales that do not use spaces to separate words (e.g., Japanese). It includes
+emoji sequences (like `👩‍🦱`) and combining diacritical characters (such as
+those in `ç` and `é`) within the same element.
 
 ## Installation
 
-This project includes both ESM and UMD module formats for better compatibility.
+This project offers both ESM and UMD module formats.
 
 ### ES module
 
 This version supports module loaders (e.g., a bundler like Webpack, Rollup, or
 Parcel, or a modern browser with ES module support).
 
-Choose the installation method  for your package manager:
+Choose the installation method for your package manager:
 
 ```bash
 npm install fragmenter
@@ -36,7 +43,7 @@ import { makeFragments } from 'fragmenter';
 
 ### UMD module
 
-This version supports environments that don't require module loaders or a build
+This version supports environments that do not require module loaders or a build
 step.
 
 It can be linked via UNPKG or jsDelivr like this:
@@ -54,49 +61,50 @@ It can be linked via UNPKG or jsDelivr like this:
 ```
 
 The `:version` placeholder in the URL needs to be replaced with an actual
-version number.
+version number. The latest version is listed at the [NPM database][6].
+
+You may also consider building the project locally and hosting it yourself.
 
 ## Usage
 
-Basic usage. See the [API documentation](#api) for more options.
+Basic usage. See the [API documentation](#api) and the [examples][7] for more
+options.
 
 ```html
 <div class="a">Hello</div>
 <div class="b">Hello World!</div>
-<div class="c">Hello!<br>How are you?</div>
+<div class="c">Hello! How are you?</div>
 ```
 
 ```javascript
 import { makeFragments } from 'fragmenter';
 
-const a = document.querySelector('.a');
-const b = document.querySelector('.b');
-const c = document.querySelector('.c');
-
-makeFragments(a, 'char'); // Splits into characters
-makeFragments(b, 'word'); // Splits into words
-makeFragments(c, 'line'); // Splits into lines
+makeFragments('.a', 'grapheme'); // Splits into graphemes
+makeFragments('.b', 'word'); // Splits into words
+makeFragments('.c', 'sentence'); // Splits into sentences
 ```
 
 Result:
 
 ```html
 <div class="a" aria-label="Hello">
-  <span aria-hidden="true" data-char="H">H</span>
-  <span aria-hidden="true" data-char="e">e</span>
-  <span aria-hidden="true" data-char="l">l</span>
-  <span aria-hidden="true" data-char="l">l</span>
-  <span aria-hidden="true" data-char="o">o</span>
+  <span aria-hidden="true" data-grapheme="H">H</span>
+  <span aria-hidden="true" data-grapheme="e">e</span>
+  <span aria-hidden="true" data-grapheme="l">l</span>
+  <span aria-hidden="true" data-grapheme="l">l</span>
+  <span aria-hidden="true" data-grapheme="o">o</span>
 </div>
 
 <div class="b" aria-label="Hello World!">
   <span aria-hidden="true" data-word="Hello">Hello</span>
-  <span aria-hidden="true" data-word="World!">World!</span>
+  <span aria-hidden="true"> </span>
+  <span aria-hidden="true" data-word="World">World</span>
+  <span aria-hidden="true">!</span>
 </div>
 
 <div class="c" aria-label="Hello! How are you?">
-  <span aria-hidden="true" data-line="Hello!">Hello!</span>
-  <span aria-hidden="true" data-line="How are you?">How are you?</span>
+  <span aria-hidden="true" data-sentence="Hello! ">Hello! </span>
+  <span aria-hidden="true" data-sentence="How are you?">How are you?</span>
 </div>
 ```
 
@@ -117,8 +125,8 @@ Each element can now be targeted with content-aware selectors like this:
     /* ... */
 }
 
-/* a specific character */
-[data-char="H"] {
+/* a specific grapheme */
+[data-grapheme="H"] {
     /* ... */
 }
 ```
@@ -128,91 +136,45 @@ functions or strings in the options object, as detailed in the API section.
 
 ## API
 
-### `makeFragments(element, method, options)`
+### `makeFragments(element, granularity, options)`
 
-Splits text into characters, words, or lines, and wraps each segment in a new element.
+Splits `element.textContent` into graphemes, words, sentences, or lines, and
+wraps each segment in a new element.
 
 **Parameters**:
 
 - `element: (string | HTMLElement)`: **Required**. The element that you want to process. It can be a CSS selector or an HTML element.
-- `method: (string)`: **Required**. Specifies how the text should be split. Possible values are:
-  - `"char"`: Split into individual characters,
+- `granularity: (string)`: **Required**. Specifies how to split the text. Possible values are:
+  - `"grapheme"`: Split into graphemes,
   - `"word"`: Split into words.
-  - `"line"`: Split into lines.
+  - `"sentence"`: Split into sentences.
+  - `"line"`: Split into lines by line break elements (`<br>`).
 - `options: (object)`: Optional. Lets you customize how the process works.
 
 **Options**:
 
 - `scope: (HTMLElement | Document)`: Limits the search for the `element` to descendants of this element. If not provided, the entire document is searched.
-- `maxElements (number)`: The maximum number of elements to create. Limited for
-  performance reasons. Defaults to `400` (limit per call).
-- `addEllipsis (boolean)`: If the text is longer than `maxElements`, adds an ellipsis (…) at the end. Defaults to `false`.
+- `maxElements (number)`: The maximum number of elements to create. Limited for performance reasons. Defaults to `400`.
+- `addEllipsis (boolean)`: If the text is longer than `maxElements`, it adds an ellipsis (…) at the end. Defaults to `false`.
 - `ellipsisText: (string)`: The text to use for the ellipsis. Defaults to `"…"` (U+2026).
-- `fragmentClass: (string | ((index: number, text: string) => string | undefined))`: The CSS class to add to each new element. It can be a simple class name (string) or a function. If it's a function, it receives the segment's index and text content as arguments, and should return a class name or `undefined` to not add any class. Defaults to `""`.
+- `fragmentClass: (string | ((index: number, text: string) => string | undefined))`: The CSS class to add to each new element. It can be a simple class name (string) or a function that receives the segment's index and text content as arguments, and should return a class name or `undefined` to not add any class. Defaults to `""`.
+- `locales: (Intl.LocalesArgument)`: The locales to use to split the text. You can find more details [at the Intl MDN page][5]. Defaults to `navigator.language`.
 
 ## Examples
 
-More examples with options.
-
----
-
-```javascript
-makeFragments(a, "char", {
-  fragmentClass(index, text) {
-    return `char${index + 1}`;
-  }
-})
-```
-
-Result:
-
-```html
-<div class="a" aria-label="Hello">
-  <span class="char1" aria-hidden="true" data-char="H">H</span>
-  <span class="char2" aria-hidden="true" data-char="e">e</span>
-  <span class="char3" aria-hidden="true" data-char="l">l</span>
-  <span class="char4" aria-hidden="true" data-char="l">l</span>
-  <span class="char5" aria-hidden="true" data-char="o">o</span>
-</div>
-```
-
----
-
-```javascript
-makeFragments(b, "word", {
-  fragmentClass(index, text) {
-    if(text === "Hello") {
-      return "myClass";
-    }
-
-    if(text === "World!") {
-      return "mySecondClass"
-    }
-  }
-})
-```
-
-Result:
-
-```html
-<div class="b" aria-label="Hello World!">
-  <span class="myClass" aria-hidden="true" data-word="Hello">Hello</span>
-  <span class="mySecondClass" aria-hidden="true" data-word="World!">World!</span>
-</div>
-```
-
----
+You can find additional examples in the [examples][7] folder.
 
 ## Notes
 
 - We call fragments the resulting `span` elements generated from the split text.
-- `fragmenter` gives you maximum control over the text styles for custom
-  lettering. Web browsers apply typographic features like kerning and ligatures
-  to text within the same element. Splitting text into separate elements, as
-  `fragmenter` does, disables these typographic features.
+- Splitting text into separate dom elements disables standard typographic
+  features like kerning and ligatures.
 - Be mindful of performance. Splitting many elements can be computationally
   expensive, especially for large amounts of text. If you need to apply custom
-  styles to a large text, your best choice is typography, not lettering.
+  styles to a large text, your best choice is type, not lettering.
+- `fragmenter` works well with modern browsers, but if you need compatibility
+  with older ones consider using polyfills for `Intl.Segmenter` and other
+  features that might need it.
 
 ## Contributing
 
@@ -222,7 +184,7 @@ Result:
 4. Write tests for your changes.
 5. Check code style issues (`yarn lint`).
 6. Run tests (`yarn test`).
-7. Submit a pull request [at Github's pull request page][1].
+7. Submit a pull request [at the project's pull request page][1].
 
 ## License
 
@@ -240,3 +202,6 @@ These projects were a great source of inspiration:
 [2]: https://github.com/jprusaki/fragmenter/blob/main/LICENSE
 [3]: http://github.com/davatron5000/Lettering.js
 [4]: https://github.com/dazld/letterify
+[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument
+[6]: https://www.npmjs.com/package/fragmenter?activeTab=versions
+[7]: https://github.com/jprusaki/fragmenter/tree/main/examples

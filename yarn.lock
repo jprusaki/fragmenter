@@ -2133,7 +2133,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:^3.1.4"
     eslint: "npm:^9.27.0"
     eslint-plugin-compat: "npm:^6.0.2"
-    globals: "npm:^16.1.0"
+    globals: "npm:^16.2.0"
     jsdom: "npm:^26.1.0"
     terser: "npm:^5.39.2"
     terser-webpack-plugin: "npm:^5.3.14"
@@ -2236,10 +2236,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.1.0":
-  version: 16.1.0
-  resolution: "globals@npm:16.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglobals%2F-%2Fglobals-16.1.0.tgz"
-  checksum: 10c0/51df6319b5b9e679338baf058ecf1125af0d3148b97e57592deabd65fca5c5dcdcca321d7589282bd6afbea9f5a40bc7329c746f46d56780813d7d1c457209a2
+"globals@npm:^16.2.0":
+  version: 16.2.0
+  resolution: "globals@npm:16.2.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fglobals%2F-%2Fglobals-16.2.0.tgz"
+  checksum: 10c0/c2b3ea163faa6f8a38076b471b12f4bda891f7df7f7d2e8294fb4801d735a51a73431bf4c1696c5bf5dbca5e0a0db894698acfcbd3068730c6b12eef185dea25
   languageName: node
   linkType: hard
 

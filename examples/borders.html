@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Nova+Square&display=swap" rel="stylesheet">
+	<title>Custom borders</title>
+	<style>
+		body {
+			visibility: hidden;
+		}
+
+		.out {
+			--width: .2em;
+			margin: 40px 20px;
+			font-family: "Bungee", sans-serif;
+			font-weight: 400;
+			font-style: normal;
+			font-size: 3em;
+			color: lightseagreen;
+		}
+
+		[data-word="This"] {
+			padding-left: 10px;
+			border-style: solid;
+			border-width: var(--width);
+			border-right: 0;
+		}
+
+		.out span:nth-child(2) {
+			border-style: solid;
+			border-width: var(--width) 0;
+		}
+
+		.out span:nth-child(n + 3) {
+			border-style: solid;
+			border-width: 0 0 var(--width);
+		}
+
+		.out span:nth-last-child(1) {
+			border-style: solid;
+			border-color: hsl(356.71, 69.52%, 58.82%);
+			color: hsl(356.71, 69.52%, 58.82%)
+		}
+	</style>
+</head>
+
+<body>
+	<div class="out">This is an example</div>
+	<script src="../lib/fragmenter.umd.min.js"></script>
+	<script>
+		window.addEventListener("load", function () {
+			document.body.style.visibility = "visible"
+		})
+		const { makeFragments } = fragmenter;
+
+		makeFragments('div', 'word')
+	</script>
+</body>
+
+</html>

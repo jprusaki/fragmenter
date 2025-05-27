@@ -11,8 +11,8 @@ export default defineConfig([
 			globals: {
 				...globals.browser,
 				...globals.node,
-			}
-		}
+			},
+		},
 	},
 	tseslint.configs.recommended,
 	compat.configs['flat/recommended'],
@@ -23,17 +23,17 @@ export default defineConfig([
 		},
 		languageOptions: {
 			parser: tseslint.parser,
-		}
+		},
 	},
 	{
 		ignores: [
-			'./lib'
-		]
+			'./lib',
+		],
 	},
 	{
-		'rules': {
-			'quotes': ['error', 'single', { 'avoidEscape': true }],
-			'semi': ['error', 'always']
-		}
-	}
+		rules: {
+			quotes: ['error', 'single', { avoidEscape: true }],
+			semi: ['error', 'always'],
+		},
+	},
 ]);

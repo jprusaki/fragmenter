@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alternating lettering with :nth-child</title>
+</head>
+<style>
+	body {
+		background-color: #2B2B2B;
+	}
+
+	h1 {
+		font-family: sans-serif;
+		font-size: 50px;
+	}
+
+	[data-grapheme]:nth-child(odd of :not([data-grapheme=" "])) {
+		color: lightsalmon
+	}
+
+	[data-grapheme]:nth-child(even of :not([data-grapheme=" "])) {
+		color: lightskyblue
+	}
+</style>
+
+<body>
+	<h1>Alternating Lettering</h1>
+
+	<script src="../lib/fragmenter.umd.min.js"></script>
+	<script>
+		const { makeFragments } = fragmenter;
+
+		makeFragments('h1', 'grapheme')
+	</script>
+</body>
+
+</html>

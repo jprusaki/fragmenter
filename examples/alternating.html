@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alternating color with fragmentClass</title>
+	<style>
+		h1 {
+			font-family: sans-serif;
+			font-size: 50px;
+		}
+
+		.even {
+			color: lightskyblue;
+		}
+
+		.odd {
+			color: lightsalmon;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Alternating Lettering</h1>
+
+	<script src="../lib/fragmenter.umd.min.js"></script>
+	<script>
+		const { makeFragments } = fragmenter;
+
+		makeFragments('h1', 'grapheme', {
+			fragmentClass: (() => {
+				let acc = 0;
+				return (_index, text) => {
+					if (text === ' ') return;
+					return (++acc % 2 === 0) ? 'even' : 'odd'
+				}
+			})()
+		})
+	</script>
+</body>
+
+</html>
