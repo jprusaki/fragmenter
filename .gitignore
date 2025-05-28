@@ -17,7 +17,7 @@ node_modules
 .pnp.*
 
 lib
-/types
+types
 *.d.ts
 test/coverage
 .vscode

@@ -7,9 +7,10 @@
 	},
 	"type": "module",
 	"license": "Apache-2.0",
-	"main": "lib/fragmenter.umd.min.js",
-	"module": "lib/fragmenter.esm.min.js",
-	"types": "types/index.d.ts",
+	"exports": {
+		"import": "./lib/fragmenter.esm.min.js",
+		"types": "./types/index.d.ts"
+	},
 	"files": [
 		"lib",
 		"types"
