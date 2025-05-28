@@ -229,7 +229,7 @@ function splitText(text: string, granularity: Granularity, locales: Intl.Locales
 	].map((s) => {
 		return {
 			value: s.segment,
-			gAttr: granularity === 'word' ? !!s.isWordLike : true,
+			gAttr: granularity !== 'word' || !!s.isWordLike,
 		};
 	});
 
