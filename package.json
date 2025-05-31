@@ -50,7 +50,7 @@
 		"coverage": "vitest run --coverage",
 		"watch": "tsc --project ./tsconfig.esm.json -w --noEmit",
 		"lint": "eslint --fix",
-		"postinstall": "mkdir etc"
+		"postinstall": "node --import tsx ./scripts/etc.ts"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.28.0",

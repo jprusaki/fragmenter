@@ -130,24 +130,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/aix-ppc64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/aix-ppc64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Faix-ppc64%2F-%2Faix-ppc64-0.25.4.tgz"
-  conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
 "@esbuild/aix-ppc64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/aix-ppc64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Faix-ppc64%2F-%2Faix-ppc64-0.25.5.tgz"
   conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/android-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fandroid-arm64%2F-%2Fandroid-arm64-0.25.4.tgz"
-  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -158,24 +144,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/android-arm@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fandroid-arm%2F-%2Fandroid-arm-0.25.4.tgz"
-  conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
 "@esbuild/android-arm@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/android-arm@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fandroid-arm%2F-%2Fandroid-arm-0.25.5.tgz"
   conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/android-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fandroid-x64%2F-%2Fandroid-x64-0.25.4.tgz"
-  conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
@@ -186,24 +158,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/darwin-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fdarwin-arm64%2F-%2Fdarwin-arm64-0.25.4.tgz"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/darwin-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/darwin-arm64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fdarwin-arm64%2F-%2Fdarwin-arm64-0.25.5.tgz"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/darwin-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/darwin-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fdarwin-x64%2F-%2Fdarwin-x64-0.25.4.tgz"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -214,24 +172,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/freebsd-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Ffreebsd-arm64%2F-%2Ffreebsd-arm64-0.25.4.tgz"
-  conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/freebsd-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/freebsd-arm64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Ffreebsd-arm64%2F-%2Ffreebsd-arm64-0.25.5.tgz"
   conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/freebsd-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/freebsd-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Ffreebsd-x64%2F-%2Ffreebsd-x64-0.25.4.tgz"
-  conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
@@ -242,24 +186,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-arm64%2F-%2Flinux-arm64-0.25.4.tgz"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-arm64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-arm64%2F-%2Flinux-arm64-0.25.5.tgz"
   conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-arm@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-arm@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-arm%2F-%2Flinux-arm-0.25.4.tgz"
-  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -270,24 +200,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-ia32@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-ia32%2F-%2Flinux-ia32-0.25.4.tgz"
-  conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-ia32@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-ia32@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-ia32%2F-%2Flinux-ia32-0.25.5.tgz"
   conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-loong64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-loong64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-loong64%2F-%2Flinux-loong64-0.25.4.tgz"
-  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -298,24 +214,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-mips64el@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-mips64el%2F-%2Flinux-mips64el-0.25.4.tgz"
-  conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-mips64el@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-mips64el@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-mips64el%2F-%2Flinux-mips64el-0.25.5.tgz"
   conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-ppc64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-ppc64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-ppc64%2F-%2Flinux-ppc64-0.25.4.tgz"
-  conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
@@ -326,24 +228,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-riscv64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-riscv64%2F-%2Flinux-riscv64-0.25.4.tgz"
-  conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-riscv64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-riscv64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-riscv64%2F-%2Flinux-riscv64-0.25.5.tgz"
   conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-s390x@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-s390x@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-s390x%2F-%2Flinux-s390x-0.25.4.tgz"
-  conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
@@ -354,24 +242,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/linux-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-x64%2F-%2Flinux-x64-0.25.4.tgz"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/linux-x64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Flinux-x64%2F-%2Flinux-x64-0.25.5.tgz"
   conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/netbsd-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/netbsd-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fnetbsd-arm64%2F-%2Fnetbsd-arm64-0.25.4.tgz"
-  conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -382,24 +256,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/netbsd-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fnetbsd-x64%2F-%2Fnetbsd-x64-0.25.4.tgz"
-  conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/netbsd-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/netbsd-x64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fnetbsd-x64%2F-%2Fnetbsd-x64-0.25.5.tgz"
   conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/openbsd-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/openbsd-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fopenbsd-arm64%2F-%2Fopenbsd-arm64-0.25.4.tgz"
-  conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -410,24 +270,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/openbsd-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fopenbsd-x64%2F-%2Fopenbsd-x64-0.25.4.tgz"
-  conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/openbsd-x64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/openbsd-x64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fopenbsd-x64%2F-%2Fopenbsd-x64-0.25.5.tgz"
   conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/sunos-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/sunos-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fsunos-x64%2F-%2Fsunos-x64-0.25.4.tgz"
-  conditions: os=sunos & cpu=x64
   languageName: node
   linkType: hard
 
@@ -438,13 +284,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-arm64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/win32-arm64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fwin32-arm64%2F-%2Fwin32-arm64-0.25.4.tgz"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/win32-arm64@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/win32-arm64@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fwin32-arm64%2F-%2Fwin32-arm64-0.25.5.tgz"
@@ -452,24 +291,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/win32-ia32@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fwin32-ia32%2F-%2Fwin32-ia32-0.25.4.tgz"
-  conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/win32-ia32@npm:0.25.5":
   version: 0.25.5
   resolution: "@esbuild/win32-ia32@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fwin32-ia32%2F-%2Fwin32-ia32-0.25.5.tgz"
   conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/win32-x64@npm:0.25.4":
-  version: 0.25.4
-  resolution: "@esbuild/win32-x64@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40esbuild%2Fwin32-x64%2F-%2Fwin32-x64-0.25.4.tgz"
-  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -957,16 +782,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
-  version: 22.15.21
-  resolution: "@types/node@npm:22.15.21::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-22.15.21.tgz"
-  dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10c0/f092bbccda2131c2b2c8f720338080aa0ef1d928f5f1062c03954a4f7dafa7ee3ed29bc3e51bd4e2584473b3d943c637a2b39ad7174898970818270187cf10c1
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:^22.15.29":
+"@types/node@npm:*, @types/node@npm:^22.15.29":
   version: 22.15.29
   resolution: "@types/node@npm:22.15.29::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2F%40types%2Fnode%2F-%2Fnode-22.15.29.tgz"
   dependencies:
@@ -1935,93 +1751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.25.0":
-  version: 0.25.4
-  resolution: "esbuild@npm:0.25.4::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fesbuild%2F-%2Fesbuild-0.25.4.tgz"
-  dependencies:
-    "@esbuild/aix-ppc64": "npm:0.25.4"
-    "@esbuild/android-arm": "npm:0.25.4"
-    "@esbuild/android-arm64": "npm:0.25.4"
-    "@esbuild/android-x64": "npm:0.25.4"
-    "@esbuild/darwin-arm64": "npm:0.25.4"
-    "@esbuild/darwin-x64": "npm:0.25.4"
-    "@esbuild/freebsd-arm64": "npm:0.25.4"
-    "@esbuild/freebsd-x64": "npm:0.25.4"
-    "@esbuild/linux-arm": "npm:0.25.4"
-    "@esbuild/linux-arm64": "npm:0.25.4"
-    "@esbuild/linux-ia32": "npm:0.25.4"
-    "@esbuild/linux-loong64": "npm:0.25.4"
-    "@esbuild/linux-mips64el": "npm:0.25.4"
-    "@esbuild/linux-ppc64": "npm:0.25.4"
-    "@esbuild/linux-riscv64": "npm:0.25.4"
-    "@esbuild/linux-s390x": "npm:0.25.4"
-    "@esbuild/linux-x64": "npm:0.25.4"
-    "@esbuild/netbsd-arm64": "npm:0.25.4"
-    "@esbuild/netbsd-x64": "npm:0.25.4"
-    "@esbuild/openbsd-arm64": "npm:0.25.4"
-    "@esbuild/openbsd-x64": "npm:0.25.4"
-    "@esbuild/sunos-x64": "npm:0.25.4"
-    "@esbuild/win32-arm64": "npm:0.25.4"
-    "@esbuild/win32-ia32": "npm:0.25.4"
-    "@esbuild/win32-x64": "npm:0.25.4"
-  dependenciesMeta:
-    "@esbuild/aix-ppc64":
-      optional: true
-    "@esbuild/android-arm":
-      optional: true
-    "@esbuild/android-arm64":
-      optional: true
-    "@esbuild/android-x64":
-      optional: true
-    "@esbuild/darwin-arm64":
-      optional: true
-    "@esbuild/darwin-x64":
-      optional: true
-    "@esbuild/freebsd-arm64":
-      optional: true
-    "@esbuild/freebsd-x64":
-      optional: true
-    "@esbuild/linux-arm":
-      optional: true
-    "@esbuild/linux-arm64":
-      optional: true
-    "@esbuild/linux-ia32":
-      optional: true
-    "@esbuild/linux-loong64":
-      optional: true
-    "@esbuild/linux-mips64el":
-      optional: true
-    "@esbuild/linux-ppc64":
-      optional: true
-    "@esbuild/linux-riscv64":
-      optional: true
-    "@esbuild/linux-s390x":
-      optional: true
-    "@esbuild/linux-x64":
-      optional: true
-    "@esbuild/netbsd-arm64":
-      optional: true
-    "@esbuild/netbsd-x64":
-      optional: true
-    "@esbuild/openbsd-arm64":
-      optional: true
-    "@esbuild/openbsd-x64":
-      optional: true
-    "@esbuild/sunos-x64":
-      optional: true
-    "@esbuild/win32-arm64":
-      optional: true
-    "@esbuild/win32-ia32":
-      optional: true
-    "@esbuild/win32-x64":
-      optional: true
-  bin:
-    esbuild: bin/esbuild
-  checksum: 10c0/db9f51248f0560bc46ab219461d338047617f6caf373c95f643b204760bdfa10c95b48cfde948949f7e509599ae4ab61c3f112092a3534936c6abfb800c565b0
-  languageName: node
-  linkType: hard
-
-"esbuild@npm:~0.25.0":
+"esbuild@npm:^0.25.0, esbuild@npm:~0.25.0":
   version: 0.25.5
   resolution: "esbuild@npm:0.25.5::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fesbuild%2F-%2Fesbuild-0.25.5.tgz"
   dependencies:
@@ -4055,21 +3785,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"terser@npm:^5.31.1":
-  version: 5.39.2
-  resolution: "terser@npm:5.39.2::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.39.2.tgz"
-  dependencies:
-    "@jridgewell/source-map": "npm:^0.3.3"
-    acorn: "npm:^8.14.0"
-    commander: "npm:^2.20.0"
-    source-map-support: "npm:~0.5.20"
-  bin:
-    terser: bin/terser
-  checksum: 10c0/f70462feddecf458ad2441b16b2969e0024f81c6e47207717a096cfa1d60b85e0c60a129b42c80bcb258c28ae16e4e6d875db8bb9df9be9b5bc748807c2916ba
-  languageName: node
-  linkType: hard
-
-"terser@npm:^5.40.0":
+"terser@npm:^5.31.1, terser@npm:^5.40.0":
   version: 5.40.0
   resolution: "terser@npm:5.40.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fterser%2F-%2Fterser-5.40.0.tgz"
   dependencies:
