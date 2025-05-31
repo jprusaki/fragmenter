@@ -48,7 +48,7 @@
 		"bundle": "NODE_OPTIONS='--import tsx' webpack --config ./webpack/webpack.config.ts --mode=production --node-env=production",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",
-		"watch": "tsc --project ./tsconfig.esm.json -w --noEmit",
+		"watch": "tsc --project ./tsconfig.build.json -w --noEmit",
 		"lint": "eslint --fix",
 		"postinstall": "node --import tsx ./scripts/etc.ts"
 	},
