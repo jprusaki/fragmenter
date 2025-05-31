@@ -1,8 +1,28 @@
 # Changelog
 
+## v2.1.0
+
+* Add `module` field to package metadata.
+* Add new documentation.
+* Add API summary.
+* Relocate bundles to the `dist` folder. CDN links will now point to this folder
+  from this version onwards.
+
+Before:
+
+```text
+https://unpkg.com/fragmenter@2.0.1/lib/fragmenter.umd.min.js
+```
+
+After:
+
+```text
+https://unpkg.com/fragmenter@2.1.0/dist/fragmenter.umd.min.js
+```
+
 ## v2.0.1
 
-Fix package entry points.
+* Fix package entry points.
 
 ## v2.0.0
 
