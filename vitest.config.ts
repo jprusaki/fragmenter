@@ -14,7 +14,8 @@ export default defineConfig({
 		coverage: {
 			exclude: [
 				...coverageConfigDefaults.exclude,
-				'./lib'
+				'./lib',
+				'./webpack',
 			],
       reportsDirectory: './test/coverage',
 			thresholds: {

@@ -1,4 +1,4 @@
-import { makeFragments } from './';
+import { makeFragments } from './index.js';
 
 let el: HTMLDivElement;
 

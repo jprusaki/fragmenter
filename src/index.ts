@@ -1,6 +1,17 @@
-/*!
- * Copyright 2025 José Pedro Rusakiewicz Serna
+/**
+ * A lightweight web design utility that simplifies splitting and wrapping
+ * text into individual elements for custom lettering.
+ *
+ * @packageDocumentation
+ */
 
+/**
+ * fragmenter
+ * https://github.com/jprusaki/fragmenter
+ * @license Apache-2.0
+ *
+ * Copyright 2025 José Pedro Rusakiewicz Serna
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,38 +25,57 @@
  * limitations under the License.
  */
 
-type Granularity = 'grapheme' | 'word' | 'sentence' | 'line'
+import { DEFAULTS } from './config.js';
+import { isGranularity, isHTMLElement, isNumber, isString, isUndefined } from './utils/typeGuards.js';
+import { validateOptions } from './utils/validate.js';
+/**
+	 * The CSS class to add to each new element. It can be a simple class name
+	 * (string) or a function. If it's a function, it receives the segment's
+	 * index and text content as arguments, and should return a class name or
+	 * `undefined` to not add any class.
+	 *
+	 * @defaultValue ""
+	 * @public
+	 */
+export type CSSClassOrClassFn = string | ((index: number, text: string) => string | undefined)
 
-interface Segment {
-	value: string;
-	gAttr: boolean;
-}
+/**
+ * Specifies how to split the text.
+ *
+ * @public
+ */
+export type Granularity = 'grapheme' | 'word' | 'sentence' | 'line'
 
-type CSSClassOrClassFn = string | ((index: number, text: string) => string | undefined)
-
-interface Options {
+/**
+ * Customize how the process works.
+ *
+ * @public
+ */
+export interface Options {
 	/**
 	 * Limits the search for the element to descendants of this element. If not
 	 * provided, the entire document is searched.
 	 *
-	 * @default document
+	 * @defaultValue `document`
 	 */
 	scope?: HTMLElement | Document;
 	/**
 	 * The maximum number of elements to create. Limited for performance reasons.
 	 *
-	 * @default 400
+	 * @defaultValue 400
 	 */
 	maxElements?: number;
 	/**
 	 * If the text is longer than {@link Options.maxElements}, adds an
 	 * ellipsis (…) at the end.
 	 *
-	 * @default false
+	 * @defaultValue false
 	 */
 	addEllipsis?: boolean;
 	/**
 	 * The text to use for the ellipsis
+	 *
+	 * @defaultValue "…" (U+2026)
 	 */
 	ellipsisText?: string;
 	/**
@@ -54,33 +84,44 @@ interface Options {
 	 * index and text content as arguments, and should return a class name or
 	 * `undefined` to not add any class.
 	 *
-	 * @default ""
+	 * @defaultValue ""
 	 */
 	fragmentClass?: CSSClassOrClassFn;
 	/**
-	 * The locales to use to split the text.
+	 * The locales to use to split the text. You can find more details
+	 * at {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument | the Intl reference page}.
+	 *
+	 * @defaultValue `navigator.language`
 	 */
 	locales?: Intl.LocalesArgument;
 }
 
-const defaultOptions: Required<Options> = {
-	scope: document,
-	maxElements: 400,
-	addEllipsis: false,
-	ellipsisText: '…',
-	fragmentClass: '',
-	locales: navigator.language,
-};
+/**
+ * Internal representation of a text segment.
+ */
+interface Segment {
+	/**
+	 * The segment's text value.
+	 */
+	value: string;
+	/**
+	 * `true` if the resulting element should include
+	 * a granularity attribute.
+	 */
+	gAttr: boolean;
+}
+
 const LINE_SPLITTER = 'dda8fc3819919fd096e9bd761d37dd10'; // MD5 hash of the string "LINE_SPLITTER".
 
 /**
  * Splits `element.textContent` into graphemes, words, sentences, or lines,
  * and wraps each segment in a new element.
  *
- * @param element The element that you want to process. It can be a CSS
+ * @public
+ * @param element - The element that you want to process. It can be a CSS
  * selector or an HTML element.
- * @param granularity Specifies how to split the text.
- * @param options Customize how the process works.
+ * @param granularity - Specifies how to split the text.
+ * @param options - Customize how the process works.
  */
 export function makeFragments(
 	element: string | HTMLElement, granularity: Granularity, options?: Options,
@@ -103,7 +144,7 @@ export function makeFragments(
 
 	const {
 		scope,
-	} = { ...defaultOptions, ...options };
+	} = { ...DEFAULTS, ...options };
 
 	const elements = isString(element)
 		? [...scope.querySelectorAll(element)]
@@ -116,56 +157,13 @@ export function makeFragments(
 	});
 }
 
-function validateOptions(options: Options) {
-	const {
-		scope,
-		maxElements,
-		addEllipsis,
-		ellipsisText,
-		fragmentClass,
-		locales,
-	} = { ...defaultOptions, ...options };
-
-	if (maxElements === null) {
-		throw new TypeError('maxElements must be a number.');
-	}
-
-	if (!Number.isInteger(maxElements)) {
-		throw new TypeError('maxElements can only be an integer.');
-	}
-
-	if (maxElements <= 0) {
-		throw new RangeError('maxElements value is out of range.');
-	}
-
-	if (scope && !isHTMLElement(scope) && !isDocument(scope)) {
-		throw new TypeError('scope can only be an HTMLElement or Document.');
-	}
-
-	if (!isBoolean(addEllipsis)) {
-		throw new TypeError('addEllipsis can only be a boolean.');
-	}
-
-	if (!isString(ellipsisText)) {
-		throw new TypeError('ellipsisText can only be a string.');
-	}
-
-	if (!isFragmentClass(fragmentClass)) {
-		throw new TypeError('fragmentClass can only be a string or a function.');
-	}
-
-	if (!isLocale(locales)) {
-		throw new TypeError('locales can only be a string, or instance of Intl.Locale, or an array of each.');
-	}
-}
-
 function apply(element: HTMLElement, granularity: Granularity, options?: Options): void {
 	if (!element.textContent) {
 		return;
 	}
 
 	const { maxElements, addEllipsis, ellipsisText, fragmentClass, locales } = {
-		...defaultOptions,
+		...DEFAULTS,
 		...options,
 	};
 
@@ -268,49 +266,4 @@ function getClassName(fragmentClass: CSSClassOrClassFn, text: string, index?: nu
 
 		return res;
 	}
-}
-
-function isString(value: unknown): value is string {
-	return typeof value === 'string';
-}
-
-function isNumber(value: unknown): value is number {
-	return typeof value === 'number';
-}
-
-function isBoolean(value: unknown): value is boolean {
-	return typeof value === 'boolean';
-}
-
-function isHTMLElement(value: unknown): value is HTMLElement {
-	return value instanceof HTMLElement;
-}
-
-function isDocument(value: unknown): value is Document {
-	return value instanceof Document;
-}
-
-function isGranularity(value: unknown): value is Granularity {
-	return value === 'grapheme'
-		|| value === 'word'
-		|| value === 'sentence'
-		|| value === 'line';
-}
-
-function isFragmentClass(value: unknown): value is CSSClassOrClassFn {
-	return isString(value) || typeof value === 'function';
-}
-
-function isUndefined(value: unknown): value is undefined {
-	return typeof value === 'undefined';
-}
-
-function isLocale(value: unknown): value is Intl.LocalesArgument {
-	const isValidLocale = (l: unknown) => typeof l === 'string' || l instanceof Intl.Locale;
-
-	if (Array.isArray(value)) {
-			return value.every(isValidLocale);
-	}
-
-	return isValidLocale(value);
 }

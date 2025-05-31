@@ -3,6 +3,7 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 import compat from 'eslint-plugin-compat';
+import tsdocPlugin from 'eslint-plugin-tsdoc';
 
 export default defineConfig([
 	{ files: ['**/*.{js,mjs,cjs,ts}'], plugins: { js }, extends: ['js/recommended'] },
@@ -28,12 +29,17 @@ export default defineConfig([
 	{
 		ignores: [
 			'./lib',
+			'./dist'
 		],
 	},
 	{
+		plugins: {
+			tsdoc: tsdocPlugin,
+		},
 		rules: {
 			quotes: ['error', 'single', { avoidEscape: true }],
 			semi: ['error', 'always'],
+			'tsdoc/syntax': 'error',
 		},
 	},
 ]);

@@ -18,7 +18,10 @@ node_modules
 
 lib
 types
+dist
 *.d.ts
 test/coverage
 .vscode
 *.tgz
+temp
+tsdoc-metadata.json

@@ -7,21 +7,27 @@
 	},
 	"type": "module",
 	"license": "Apache-2.0",
+	"module": "./lib/index.js",
 	"exports": {
-		"import": "./lib/fragmenter.esm.min.js",
-		"types": "./types/index.d.ts"
+		"import": "./lib/index.js",
+		"types": "./lib/fragmenter.d.ts"
 	},
 	"files": [
 		"lib",
-		"types"
+		"dist",
+		"docs",
+		"etc"
 	],
 	"description": "A lightweight web design utility that simplifies splitting and wrapping text into individual elements for custom lettering.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/jprusaki/fragmenter.git"
 	},
+	"bugs": {
+		"url": "https://github.com/jprusaki/fragmenter/issues"
+	},
 	"engines": {
-		"node": ">=23.11.0"
+		"node": ">=24.1.0"
 	},
 	"keywords": [
 		"typography",
@@ -35,31 +41,31 @@
 		"frontend",
 		"html"
 	],
-	"bugs": {
-		"url": "https://github.com/jprusaki/fragmenter/issues"
-	},
 	"scripts": {
-		"build": "yarn build:esm && yarn build:umd",
-		"build:esm": "tsc --project tsconfig.esm.json && yarn minify",
-		"build:umd": "webpack --mode=production --node-env=production",
-		"minify": "terser -co lib/fragmenter.esm.min.js --source-map content='lib/index.js.map',url='fragmenter.esm.min.js.map' -m reserved=['element','method','options'] lib/index.js",
+		"build": "rm -rf ./lib ./types ./dist && tsc -p ./tsconfig.build.json && yarn build:umd",
+		"build:esm": "yarn bundle --env module=esm",
+		"build:umd": "yarn bundle --env module=umd",
+		"bundle": "NODE_OPTIONS='--import tsx' webpack --config ./webpack/webpack.config.ts --mode=production --node-env=production",
 		"test": "vitest",
 		"coverage": "vitest run --coverage",
-		"watch": "tsc --project tsconfig.esm.json -w --noEmit",
-		"lint": "eslint --fix"
+		"watch": "tsc --project ./tsconfig.esm.json -w --noEmit",
+		"lint": "eslint --fix",
+		"postinstall": "mkdir etc"
 	},
 	"devDependencies": {
-		"@eslint/js": "^9.27.0",
+		"@eslint/js": "^9.28.0",
 		"@testing-library/jest-dom": "^6.6.3",
-		"@types/node": "^22.15.23",
+		"@types/node": "^22.15.29",
 		"@vitest/coverage-v8": "^3.1.4",
-		"eslint": "^9.27.0",
+		"eslint": "^9.28.0",
 		"eslint-plugin-compat": "^6.0.2",
+		"eslint-plugin-tsdoc": "^0.4.0",
 		"globals": "^16.2.0",
 		"jsdom": "^26.1.0",
 		"terser": "^5.40.0",
 		"terser-webpack-plugin": "^5.3.14",
 		"ts-loader": "^9.5.2",
+		"tsx": "^4.19.4",
 		"typescript": "^5.8.3",
 		"typescript-eslint": "^8.33.0",
 		"vitest": "^3.1.4",
