@@ -54,7 +54,7 @@ It can be linked via UNPKG or jsDelivr like this:
 <body>
   <!-- Page content -->
 
-  <script src="https://unpkg.com/fragmenter@:version/lib/fragmenter.umd.min.js"></script>
+  <script src="https://unpkg.com/fragmenter@:version/dist/fragmenter.umd.min.js"></script>
   <script>
     // fragmenter is now available in the global scope
     const { makeFragments } = fragmenter;
