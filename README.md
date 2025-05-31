@@ -149,7 +149,7 @@ An API summary can be found at the report file:
 
 ## Examples
 
-You can find additional examples in the [examples][7] folder.
+You can find additional examples in the [examples][6] folder.
 
 ## Notes
 
