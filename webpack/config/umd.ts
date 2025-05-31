@@ -1,4 +1,4 @@
-import { dirname, resolve } from 'node:path/posix';
+import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Configuration } from 'webpack';
 
