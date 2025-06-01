@@ -50,7 +50,7 @@
 		"coverage": "vitest run --coverage",
 		"watch": "tsc --project ./tsconfig.build.json -w --noEmit",
 		"lint": "eslint --fix",
-		"postinstall": "node --import tsx ./scripts/etc.ts"
+		"postinstall": "node ./scripts/etc.js"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.28.0",

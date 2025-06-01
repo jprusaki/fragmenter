@@ -11,7 +11,7 @@ try {
 		mkdirSync(etc);
 	}
 } catch (error) {
-	console.error('Postinstall: Failed creating "etc" folder.' );
+	console.error('Postinstall: Failed creating "etc" folder.');
 	console.error(error);
 	process.exit(1);
 }
