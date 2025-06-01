@@ -16,7 +16,8 @@
 		"lib",
 		"dist",
 		"docs",
-		"etc"
+		"etc",
+		"scripts"
 	],
 	"description": "A lightweight web design utility that simplifies splitting and wrapping text into individual elements for custom lettering.",
 	"repository": {
