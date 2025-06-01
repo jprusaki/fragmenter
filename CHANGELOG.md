@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.2
+
+* Include scripts folder in releases.
+
 ## v2.1.1
 
 * Fix downstream dependency requirements that could make some projects unable to
