@@ -74,7 +74,7 @@ options
 
 </td><td>
 
-_(Optional)_ Customize how the process works.
+_(Optional)_ Customize how fragmenter works.
 
 
 </td></tr>

@@ -74,6 +74,7 @@ const webpackConfigFunction = (env: Env): Configuration | undefined => {
 	} else {
 		baseConfig.mode = 'development';
 	}
+
 	if (env.module === 'umd') {
 		return { ...baseConfig, ...UMDConfig };
 	}

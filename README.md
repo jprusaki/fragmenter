@@ -16,7 +16,7 @@ those in `ç` and `é`) within the same element.
 
 ## Installation
 
-This project offers both ESM and UMD module formats.
+This project offers ESM and UMD module formats.
 
 ### ES module
 

@@ -4,7 +4,7 @@
 
 ## Options interface
 
-Customize how the process works.
+Customize how fragmenter works.
 
 **Signature:**
 

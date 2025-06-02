@@ -26,17 +26,17 @@
  */
 
 import { DEFAULTS } from './config.js';
-import { isGranularity, isHTMLElement, isNumber, isString, isUndefined } from './utils/typeGuards.js';
+import { apply } from './utils/dom.js';
+import { isGranularity, isHTMLElement, isString } from './utils/typeGuards.js';
 import { validateOptions } from './utils/validate.js';
 /**
-	 * The CSS class to add to each new element. It can be a simple class name
-	 * (string) or a function. If it's a function, it receives the segment's
-	 * index and text content as arguments, and should return a class name or
-	 * `undefined` to not add any class.
-	 *
-	 * @defaultValue ""
-	 * @public
-	 */
+ * The CSS class to add to each new element. It can be a simple class name
+ * (string) or a function. If it's a function, it receives the segment's
+ * index and text content as arguments, and should return a class name or
+ * `undefined` to not add any class.
+ *
+ * @public
+ */
 export type CSSClassOrClassFn = string | ((index: number, text: string) => string | undefined)
 
 /**
@@ -47,7 +47,7 @@ export type CSSClassOrClassFn = string | ((index: number, text: string) => strin
 export type Granularity = 'grapheme' | 'word' | 'sentence' | 'line'
 
 /**
- * Customize how the process works.
+ * Customize how fragmenter works.
  *
  * @public
  */
@@ -97,23 +97,6 @@ export interface Options {
 }
 
 /**
- * Internal representation of a text segment.
- */
-interface Segment {
-	/**
-	 * The segment's text value.
-	 */
-	value: string;
-	/**
-	 * `true` if the resulting element should include
-	 * a granularity attribute.
-	 */
-	gAttr: boolean;
-}
-
-const LINE_SPLITTER = 'dda8fc3819919fd096e9bd761d37dd10'; // MD5 hash of the string "LINE_SPLITTER".
-
-/**
  * Splits `element.textContent` into graphemes, words, sentences, or lines,
  * and wraps each segment in a new element.
  *
@@ -121,7 +104,7 @@ const LINE_SPLITTER = 'dda8fc3819919fd096e9bd761d37dd10'; // MD5 hash of the str
  * @param element - The element that you want to process. It can be a CSS
  * selector or an HTML element.
  * @param granularity - Specifies how to split the text.
- * @param options - Customize how the process works.
+ * @param options - Customize how fragmenter works.
  */
 export function makeFragments(
 	element: string | HTMLElement, granularity: Granularity, options?: Options,
@@ -155,115 +138,4 @@ export function makeFragments(
 			apply(element, granularity, options);
 		}
 	});
-}
-
-function apply(element: HTMLElement, granularity: Granularity, options?: Options): void {
-	if (!element.textContent) {
-		return;
-	}
-
-	const { maxElements, addEllipsis, ellipsisText, fragmentClass, locales } = {
-		...DEFAULTS,
-		...options,
-	};
-
-	if (granularity === 'line') {
-		const brList = [
-			...element.getElementsByTagName('br'),
-		];
-
-		for (const br of brList) {
-			br.replaceWith(document.createTextNode(LINE_SPLITTER));
-		}
-	}
-
-	const segments = splitText(element.textContent, granularity, locales);
-	const limitedSegments = segments.slice(0, maxElements);
-
-	const fragment = document.createDocumentFragment();
-	limitedSegments.forEach(({ value, gAttr }, index) => {
-		const span = createSpanElement(value,  fragmentClass, index);
-
-		if (gAttr) {
-			span.dataset[granularity] = value;
-		}
-
-		fragment.append(span);
-	});
-
-	if (addEllipsis && limitedSegments.length < segments.length) {
-		const ellipsisSpan = createSpanElement(ellipsisText);
-
-		ellipsisSpan.dataset.ellipsis = ellipsisText;
-		fragment.append(ellipsisSpan);
-	}
-
-	if (!element.hasAttribute('aria-label')) {
-		element.ariaLabel = granularity === 'line'
-			? segments.flatMap(s => s.value).join(' ')
-			: element.textContent;
-	}
-
-	element.innerHTML = '';
-	element.append(fragment);
-}
-
-function splitText(text: string, granularity: Granularity, locales: Intl.LocalesArgument): Segment[] {
-	if (granularity === 'line') {
-		const segments: Segment[] = text.split(LINE_SPLITTER).map((s: string) => {
-			return {
-				value: s,
-				gAttr: true,
-			};
-		});
-
-		return segments;
-	}
-
-	const segments: Segment[] = [
-		...new Intl.Segmenter(locales, {
-			granularity,
-		}).segment(text),
-	].map((s) => {
-		return {
-			value: s.segment,
-			gAttr: granularity !== 'word' || !!s.isWordLike,
-		};
-	});
-
-	return segments;
-}
-
-function createSpanElement(
-	text: string, fragmentClass?: CSSClassOrClassFn, index?: number,
-): HTMLSpanElement {
-	const span = document.createElement('span');
-	span.textContent = text;
-	span.ariaHidden = 'true';
-
-	if (fragmentClass) {
-		const className = getClassName(fragmentClass, text, index);
-
-		if (className) {
-			span.classList.add(className);
-		}
-	}
-
-	return span;
-}
-
-function getClassName(fragmentClass: CSSClassOrClassFn, text: string, index?: number): string | undefined {
-	if (isString(fragmentClass)) {
-		return fragmentClass;
-	}
-
-	if (isNumber(index)) {
-		const res = fragmentClass(index, text);
-
-		if (!isUndefined(res) && !isString(res)) {
-			throw new TypeError('The return value of the fragmentClass function can only be a string or undefined.');
-		}
-
-		return res;
-	}
 }

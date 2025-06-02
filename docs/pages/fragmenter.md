@@ -52,7 +52,7 @@ Description
 
 </td><td>
 
-Customize how the process works.
+Customize how fragmenter works.
 
 
 </td></tr>
