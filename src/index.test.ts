@@ -25,7 +25,6 @@ describe('makeFragments', () => {
 		el.textContent = text;
 
 		expect(() => makeFragments('div', 'word')).not.toThrow();
-		expect(el);
 	});
 
 	it('should split text into character elements', () => {
