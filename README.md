@@ -63,7 +63,7 @@ It can be linked via UNPKG or jsDelivr like this:
 ```
 
 The `:version` placeholder in the URL needs to be replaced with an actual
-version number. The latest version is listed at the [NPM database][5].
+version number. The latest version is listed at the [NPM registry][5].
 
 You may also consider building the project locally and hosting it yourself.
 
