@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.3
+
+* Fix the `exports` field in metadata to comply with spec.
+* Documentation improvements.
+
 ## v2.1.2
 
 * Include scripts folder in releases.
